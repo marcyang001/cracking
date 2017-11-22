@@ -1,0 +1,22 @@
+- Design an API for searching for contact information . - Choose a data structure for search function - Implement search function
+
+
+Solution 1: Prefix Tree: Suitable for searching names, phone numbers since the given information is gonna be accurate and within limited charset. This approach is most space efficient. Different names with same prefix is gonna share the same prefix thus saving memory. O(L) query time, L is the size of the search term. 
+
+Solution 2: Hash Map. Pros: searches keys fast. hash function may be able to handle a wider variety of inputs. But takes more space than prefix tree an may have collision on high scale. O(1) search time. 
+
+Solution 3: binary search on arrays? time consuming. Consider categorizing the terms and create hierarchies to reduce search time. O(log n) query time. 
+
+	
+
+Interview Questions
+
+Given a list of n unsorted key-value tuples which are too large to fit in memory, return the k tuples with the greatest value where n is several orders of magnitude greater than k. This list may be dispersed across multiple machines.  
+2 Answers
+Given a tree of order n which is neither complete or a search tree, write a function to construct a new tree of order m in-place. Memory usage is bound to 2 times the size of the tree. The new tree must be complete, and a node A cannot be a child of another node B in the new tree if A was an ancestor of B in the old… 
+Show More
+Given a list of movement commands (up, down, left, right, undo previous action), write a function that returns the final (x,y) coordinate. Followup: how would you handle other kinds of commands and undoing them? What kind of design pattern is this?  
+2 Answers
+Given two very large timestamped sorted log files that do not fit in memory (possibly on different machines), merge them in timestamp order. Provide some test cases.  
+2 Answers
+Describe how you would design a data experimentation platform.  
