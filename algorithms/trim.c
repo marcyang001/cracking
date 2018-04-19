@@ -51,6 +51,40 @@ size_t trimwhitespace(char *out, size_t len, const char *str) {
 
 }
 
+// optimized version. Reduce the time complexity by half
+size_t trimWord_optimized(char *out, size_t len, const char* str) {
+
+
+	int start = -1, end = -1, outLen = 0; 
+	int startPointer = 0, endPointer = len -1;
+	int i;
+	// get the starting and ending point of the string, O(n/2)
+	while (startPointer < endPointer && (start == -1 && end == -1)) {
+
+		if (str[startPointer] != ' ') {
+			start = startPointer;
+		}
+
+		if (str[endPointer] != ' ') {
+			end = endPointer;
+		}
+		startPointer++;
+		endPointer--;
+	}
+
+	// store the characters from start till end pointers into a memory
+	for (i = start; i <= end; i++) {
+		*(out + (i-start)) = str[i];
+	}
+
+	outLen = end - start + 1;
+	*(out + outLen) = '\0';
+
+	return outLen;
+
+}
+
+
 int main() {
 
 	char *out = (char *) malloc(100 * sizeof(char));
