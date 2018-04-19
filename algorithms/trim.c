@@ -23,12 +23,6 @@ size_t trimwhitespace(char *out, size_t len, const char *str) {
     return 0;
   }
   
-  // append each character to out from the starting character till the end
-  // out = "hi   " 
-  for (i = start; i < len; i++) {	
-    *(out + (i-start)) = str[i];
-  }
-  
   //iterate backwards to check for the ending character
   // i = 7 to 0 
   for (i = len-1; i >= 0; i--) {
@@ -38,6 +32,15 @@ size_t trimwhitespace(char *out, size_t len, const char *str) {
       break;
     }
   }
+
+
+  // append each character to out from the starting character till the end
+  // out = "hi   " 
+  for (i = start; i <= end; i++) {	
+    *(out + (i-start)) = str[i];
+  }
+  
+
   
   //start = 3, end = 4
   
