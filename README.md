@@ -9,4 +9,4 @@ The solutions are either in :
 This repo is to implement the algorithmic problems that I solved on paper into actual code.
 The problems are from easy to medium. It is a way to keep my mind staying fresh. 
 
-#keepworkinghard #hardworkwillpayoff #hustle
+#keepWorkingHard #hardWorkWillPayoff #keepASteadyHustle
