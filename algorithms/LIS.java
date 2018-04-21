@@ -106,12 +106,42 @@ public class LIS {
 	}
 
 
+
+	public static int LIS_tabulation(int[] A) {
+
+		int size = A.length;
+		if (size == 0) return 0;
+
+		int i, j, max = 0;
+		int[] lis = new int[size];
+
+		initialize_Array(lis, 1);
+
+		for (i = 1; i < size; i++) {
+			for (j = 0; j < i; j++) {
+
+				if (A[i] > A[j]) {
+					lis[i] = 1 + lis[j];
+				}
+				else {
+					lis[i] = lis[j];
+				}
+			}
+
+		}
+		
+		return lis[size-1];
+	}
+
+
+
 	public static void main(String[] args) {
 
 		int[] arr = {10, 22, 9, 33, 21, 50, 41, 60, 80};
-
-
+		// int[] arr = {};
 		System.out.println(LIS_Memorization(arr));
+
+		System.out.println(LIS_tabulation(arr));
 
 	}
 
