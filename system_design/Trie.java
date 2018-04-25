@@ -101,7 +101,7 @@ public class Trie {
 		if (preCrawl != null) {
 			StringBuilder wordString = new StringBuilder(prefix);
 
-			printAllWords(preCrawl, new StringBuilder());		
+			printAllWords(preCrawl, wordString);		
 		}
 
 
@@ -125,6 +125,7 @@ public class Trie {
          		char alpha_letter = (char) (i+'a');
          		word.append(alpha_letter);
          		printAllWords(root.children[i], word);
+         		word.deleteCharAt(word.length()-1);
     		}
     	}
     }
@@ -149,32 +150,34 @@ public class Trie {
 			insert(keys[i]);
 	
 		// Search for different keys
-		if(search("the") == true)
-			System.out.println("the --- " + output[1]);
-		else System.out.println("the --- " + output[0]);
+		// if(search("the") == true)
+		// 	System.out.println("the --- " + output[1]);
+		// else System.out.println("the --- " + output[0]);
 		
-		if(search("these") == true)
-			System.out.println("these --- " + output[1]);
-		else System.out.println("these --- " + output[0]);
+		// if(search("these") == true)
+		// 	System.out.println("these --- " + output[1]);
+		// else System.out.println("these --- " + output[0]);
 		
-		if(search("their") == true)
-			System.out.println("their --- " + output[1]);
-		else System.out.println("their --- " + output[0]);
+		// if(search("their") == true)
+		// 	System.out.println("their --- " + output[1]);
+		// else System.out.println("their --- " + output[0]);
 		
-		if(search("thaw") == true)
-			System.out.println("thaw --- " + output[1]);
-		else System.out.println("thaw --- " + output[0]);
+		// if(search("thaw") == true)
+		// 	System.out.println("thaw --- " + output[1]);
+		// else System.out.println("thaw --- " + output[0]);
 		
-		if(search("marc") == true)
-			System.out.println("marc --- " + output[1]);
-		else System.out.println("marc --- " + output[0]);
+		// if(search("marc") == true)
+		// 	System.out.println("marc --- " + output[1]);
+		// else System.out.println("marc --- " + output[0]);
 		
-		if(search("marcs") == true)
-			System.out.println("marcs --- " + output[1]);
-		else System.out.println("marcs --- " + output[0]);
+		// if(search("marcs") == true)
+		// 	System.out.println("marcs --- " + output[1]);
+		// else System.out.println("marcs --- " + output[0]);
 		
 		searchPrefix("the");
 		//searchPrefix("marc");
+
+		//printAllWords(root,  new StringBuilder());
 
 	}
 }
