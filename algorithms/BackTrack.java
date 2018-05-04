@@ -5,6 +5,8 @@ import java.util.*;
 public class BackTrack {
 
 	/* 
+	input: a maze
+
 	-------------
 	  0	 1 	2   |
 	|  	---------	   
@@ -12,6 +14,9 @@ public class BackTrack {
  	|	|   -----  
     | 6 | 7  8		
 	-------------- 
+	
+	output: a path from start to end
+
 	*/
 
 
@@ -30,12 +35,12 @@ public class BackTrack {
 
 		for (Integer cur : maze[start])
 		{
-			// System.out.print(cur + " ");
+			
 			if (!visited.contains(cur)) {
-				//System.out.println(" not visited " + cur);
+				
 				if (Solve_MazeHelper(maze, cur, finish, visited, path)) {
-					//System.out.println(" add " + cur);
 					path.addFirst(cur);
+					
 					return true;
 				}
 			}
