@@ -1,7 +1,26 @@
 
 import java.util.*;
 
+/*
+
+Longest Common Subsequence 
+
+Input: AEDFHR 
+	   ABCDGH 
+
+Output: ADH ==> 3
+
+Input: AGGTAB
+	   GXTXAYB
+
+Output: GTAB ==> 4 
+
+
+
+*/
+
 public class LCS {
+
 	public static void initialize_Array(int[] lookup, int value) {
 		/////////////////////////////////////////////////////////////////
 		/* 
@@ -49,8 +68,30 @@ public class LCS {
 	}
 
 
+	public static int LCS_tabulation(char[] word1, char[] word2, int m, int n) {
+		int L[][] = new int[m+1][n+1];
 
-	
+
+		for (int i = 0; i <= m; i++) {
+			for (int j = 0; j <= n; j++) {
+				// fill the buffer with 0s 
+				if (i == 0 || j == 0) {
+					L[i][j] = 0;
+				}
+				// common character between X and Y 
+				else if (word1[i-1] == word2[j-1]) {
+					L[i][j] = L[i-1][j-1] + 1;
+				}
+				else {
+					L[i][j] = Math.max(L[i-1][j], L[i][j-1]);
+				}
+			}
+		}
+
+		return L[m][n];
+	}
+
+
 
 	public static void main(String[] args) {
 		// String s1 = "AGGTAB";
@@ -64,13 +105,12 @@ public class LCS {
     	char[] Y=s2.toCharArray();
     	int m = X.length;
     	int n = Y.length;
- 		int[] lookup = new int[Math.min(m, n)+1];
-
- 		initialize_Array(lookup, -1);
 
 
 
     	System.out.println("Length of LCS is" + " " + LCS_memorization(X, Y, m, n));
+    	
+    	System.out.println("Length of LCS is" + " " + LCS_tabulation(X, Y, m, n));
 	}
 
 
