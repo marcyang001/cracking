@@ -105,8 +105,68 @@ public class BackTrack {
 
 	}
 
+	/*
+		Print a list of possible combinations gives an array of values and 
+		a constant value that define the number of values in a combo 
+
+		nums : a list of values 
+		data : a combo 
+		start: current index of nums
+		finish: the last element of nums 
+		index: current index of data
+		r: a number of values in a combo
+	*/
+
+
+
+	public static void combination(int[] nums, int[] data, int start, int end, int index, int r) {
+
+		if (index == r) {
+			for (int i : data) {
+				System.out.print(i + " ");
+			}
+			System.out.println();
+			return;
+		}
+
+
+
+		for (int i=start; i<=end && end-i+1 >= r-index; i++) 
+		{
+
+			data[index] = nums[i];
+
+			// removing duplicates
+			if (i + 1 < end) {
+        		while (nums[i] == nums[i+1]) {
+        			
+					i++; 
+        		}	
+        	}
+
+			combination(nums, data, i+1, end, index +1, r);
+        	
+
+        	
+		}
+
+	}
+
+
+	public static void testCombination() {
+
+		int nums[] = {1, 1, 2, 3, 4 , 5};
+		int r = 3; 
+		int[] data = new int[r];
+
+		combination(nums, data, 0, nums.length-1, 0, r);
+	}
+
+
+
 	public static void main(String[] args) {
-		testMaze();
+		// testMaze();
+		testCombination();
 	}
 
 
