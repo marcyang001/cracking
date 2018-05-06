@@ -119,17 +119,20 @@ public class BackTrack {
 
 
 
-	public static void combination(int[] nums, int[] data, int start, int end, int index, int r) {
+	public static void combination1Way(int[] nums, int[] data, int start, int end, int index, int r, ArrayList<String> result) {
 
 		if (index == r) {
+			String temp = "";
 			for (int i : data) {
-				System.out.print(i + " ");
+				// System.out.print(i + " ");
+				temp += i + " ";
 			}
-			System.out.println();
+
+			result.add(temp);
+
+			// System.out.println();
 			return;
 		}
-
-
 
 		for (int i=start; i<=end && end-i+1 >= r-index; i++) 
 		{
@@ -144,22 +147,58 @@ public class BackTrack {
         		}	
         	}
 
-			combination(nums, data, i+1, end, index +1, r);
-        	
+			combination1Way(nums, data, i+1, end, index +1, r, result);        	
+		}
+	}
 
-        	
+	public static void combination2Way(int arr[], int n, int r, int index, int data[], int i) {
+
+		// Current cobination is ready, print it
+		if (index == r)
+		{
+			for (int j=0; j<r; j++)
+				System.out.print(data[j] + " ");
+			System.out.println();
+			return;
 		}
 
+		// When no more elements are there to put in data[]
+    	if (i >= n)
+        	return;
+
+        // current is included, put next at next location
+        data[index] = arr[i];
+        
+        // removing duplicates
+		if (i + 1 < n) {
+       		while (arr[i] == arr[i+1]) {
+        			
+				i++; 
+       		}	
+        }
+
+        combination2Way(arr, n, r, index+1, data, i+1);
+
+
+        // current is is excluded, replace it with next (Note that
+    	// i+1 is passed, but index is not changed)
+        combination2Way(arr, n, r, index, data, i+1);
 	}
 
 
 	public static void testCombination() {
 
-		int nums[] = {1, 1, 2, 3, 4 , 5};
+		int nums[] = {1, 2, 3, 4 , 5};
 		int r = 3; 
 		int[] data = new int[r];
+		ArrayList<String> result = new ArrayList<>();
 
-		combination(nums, data, 0, nums.length-1, 0, r);
+		combination1Way(nums, data, 0, nums.length-1, 0, r, result);
+
+		for (String combo : result)
+			System.out.println(combo);
+
+		// combination2Way(nums, nums.length, r, 0, data, 0);
 	}
 
 
