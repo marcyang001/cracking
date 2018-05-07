@@ -201,11 +201,44 @@ public class BackTrack {
 		// combination2Way(nums, nums.length, r, 0, data, 0);
 	}
 
+	public static void permute(int start, int[] input ) {
+        
+        if (start == input.length) {
+            //System.out.println(input);
+            for(int x: input){
+            	System.out.print(x + " ");
+        	}
 
+	        System.out.println("");
+	        return;
+    	}
+
+	    for (int i = start; i < input.length; i++) {
+	        // swapping
+	        int temp = input[i];
+	        input[i] = input[start];
+	        input[start] = temp;
+	       // swap(input[i], input[start]);
+
+	        permute(start + 1, input);
+	       // swap(input[i],input[start]);
+
+	        int temp2 = input[i];
+	        input[i] = input[start];
+	        input[start] = temp2;
+	    }
+	}
+
+	public static void testPermutation() {
+		int[] a={1,2,3};
+		permute(0, a); 
+		
+	}
 
 	public static void main(String[] args) {
 		// testMaze();
-		testCombination();
+		// testCombination();
+		testPermutation();
 	}
 
 
