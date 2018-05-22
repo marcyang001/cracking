@@ -19,7 +19,8 @@ public class BackTrack {
 
 	*/
 
-
+	private int count = 0;
+	private HashMap<String, String> map = new HashMap<>(); 
 
 	public static boolean Solve_MazeHelper(List<Integer>[] maze, Integer start, Integer finish, Set<Integer> visited, LinkedList<Integer> path) {
 
@@ -235,10 +236,110 @@ public class BackTrack {
 		
 	}
 
+
+	public static List<String> readBinaryWatch(int num) {
+        List<String> res = new ArrayList<>();
+        int[] nums1 = new int[]{8, 4, 2, 1};
+        int[] nums2 = new int[]{32, 16, 8, 4, 2, 1};
+        for(int i = 0; i <= num; i++) {
+            if(num - i > 6) continue;
+            List<Integer> list1 = generateDigit(nums1, i); // hour
+            List<Integer> list2 = generateDigit(nums2, num - i); // minitues
+            for(int num1: list1) {
+                if(num1 >= 12) continue;
+                for(int num2: list2) {
+                    if(num2 >= 60) continue;
+                    res.add(num1 + ":" + (num2 < 10 ? "0" + num2 : num2));
+                }
+            }
+        }
+        return res;
+    }
+    
+    private static List<Integer> generateDigit(int[] nums, int count) {
+        List<Integer> res = new ArrayList<>();
+        generateDigitHelper(nums, count, 0, 0, res);
+        return res;
+    }
+    
+    private static void generateDigitHelper(int[] nums, int count, int pos, int sum, List<Integer> res) {
+        if(count == 0) {
+            res.add(sum);
+            return;
+        }
+        for(int i = pos; i < nums.length; i++) {
+            generateDigitHelper(nums, count - 1, i + 1, sum + nums[i], res);
+        }
+    }
+
+
+    public static void testBinaryWatch() {
+
+    	List<String> result = readBinaryWatch(5);
+
+    	for (String time : result) {
+    		System.out.print(time + ", ");
+    	}
+    	System.out.println(result.size());
+
+    }
+
+    private void initDictionary() {
+        String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H",
+                           "I", "J", "K", "L", "M", "N", "O", "P", 
+                            "Q", "R", "S", "T", "U",
+                           "V", "W", "X", "Y", "Z"};
+        
+        for (int i = 1; i<= 26; i++) {
+            String num = i+"";
+            map.put(num, letters[i-1]);
+        }
+        
+    }
+    
+    public int numDecodings(String s) {
+     	// store all the code 1 to 26 into hashmap    
+        initDictionary();
+        helperNumDecodings(s, s.length());
+        return this.count;
+    }
+    
+    private boolean helperNumDecodings(String s, int n) {
+        
+        for (int i = 1; i <= n; i++) {
+            
+            boolean b = map.containsKey(s.substring(0, i)); 
+            if (b && i == n) {
+                count++;
+                return true;
+            }
+            else if (b) {
+                
+                b = helperNumDecodings(s.substring(i, n), n-i);
+                if (b && i == n) {
+                    count++;
+                    return true;
+                }
+            }
+        }
+        
+        
+        return false;  
+    }
+
+    public static void testNumDecodings() {
+    	BackTrack bt = new BackTrack();
+    	int a = bt.numDecodings("4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948");
+    	System.out.println(a);
+    }
+
+
 	public static void main(String[] args) {
 		// testMaze();
 		// testCombination();
-		testPermutation();
+		// testPermutation();
+		// testBinaryWatch();
+		testNumDecodings();
 	}
 
 
