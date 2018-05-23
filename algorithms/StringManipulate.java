@@ -54,20 +54,34 @@ public class StringManipulate {
 		return word;
 	}
 
+	public static String reverse(String s) {
+		int n = s.length();
+		if (n == 1) {
+			return s;
+		}
+
+		return s.substring(n-1, n) + reverse(s.substring(0, n-1));
+	} 
+
 
 	public static void main(String[] args) {
 
 
-		char[] reversedChars = "hello world".toCharArray();
-		reverseString(reversedChars, 0, reversedChars.length);
-		String reversed = new String(reversedChars);
+		// char[] reversedChars = "hello world".toCharArray();
+		// reverseString(reversedChars, 0, reversedChars.length);
+		// String reversed = new String(reversedChars);
 
-		System.out.println(reversed);
+		// System.out.println(reversed);
 
-		String reverseWords = new String(reverseWordsInSentence(reversedChars));
-		System.out.println(reverseWords);
+		// String reverseWords = new String(reverseWordsInSentence(reversedChars));
+		// System.out.println(reverseWords);
+
+		System.out.println(reverse("hello"));
+
 
 	}
+
+
 
 
 
