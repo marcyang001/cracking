@@ -309,12 +309,15 @@ public class BackTrack {
         for (int i = 1; i <= n; i++) {
             
             boolean b = map.containsKey(s.substring(0, i)); 
+            // head is valid and its the end of the word 
             if (b && i == n) {
                 count++;
                 return true;
             }
+            // check if the head is valid 
             else if (b) {
                 
+                // check the rest 
                 b = helperNumDecodings(s.substring(i, n), n-i);
                 if (b && i == n) {
                     count++;
@@ -327,11 +330,74 @@ public class BackTrack {
         return false;  
     }
 
+    public int numDecodings_tabulation(String s) {
+
+    	int n = s.length();
+
+    	if (n == 0) {
+    		return 0; 
+    	}
+
+    	int[] f = new int[n+1];
+
+    	f[0] = 0;
+    	if (s.charAt(0) == '0') {
+    		return 0;
+    	}
+
+    	f[1] = 1;
+    	// only has one character to decode
+    	if(n == 1) {
+           return f[1];
+        }
+        
+        //check the cases where there are only two characters to decode
+
+        // edge case: 10
+		if(s.charAt(1) != '0') {
+            f[2] = f[1];
+        }
+
+        
+        int twoDigits = Integer.parseInt(s.substring(0,2));
+        
+        if(twoDigits >= 10 && twoDigits <= 26) {
+            f[2] += 1;
+        }
+
+
+        // more than two --> use dp tabulation
+        for (int i = 3; i <= n; i++) {
+
+        	// check the previous character if it's valid
+        	// inherit all the previous number of ways of decoding
+        	if (s.charAt(i-1) != '0') {
+        		f[i] += f[i-1];
+        	}
+
+        	// check if the two previous characters are between 10 and 26
+        	// another way to decode into letters
+        	twoDigits = Integer.parseInt(s.substring(i-2, i));
+        	if(twoDigits >= 10 && twoDigits <= 26) {
+                f[i] += f[i-2];
+            }
+
+        }
+
+    	return f[n];
+    }
+
+    
     public static void testNumDecodings() {
     	BackTrack bt = new BackTrack();
-    	int a = bt.numDecodings("4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948");
+    	String test1 = "4757562545844617494555774581341211511296816786586787755257741178599337186486723247528324612117156948";
+    	int a = bt.numDecodings(test1);
+    	int b = bt.numDecodings_tabulation(test1);
     	System.out.println(a);
+    	System.out.println(b);
     }
+
+
 
 
 	public static void main(String[] args) {
