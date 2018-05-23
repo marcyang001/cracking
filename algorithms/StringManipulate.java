@@ -59,7 +59,7 @@ public class StringManipulate {
 		if (n == 1) {
 			return s;
 		}
-
+		
 		return s.substring(n-1, n) + reverse(s.substring(0, n-1));
 	} 
 

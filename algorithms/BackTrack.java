@@ -365,7 +365,6 @@ public class BackTrack {
             f[2] += 1;
         }
 
-
         // more than two --> use dp tabulation
         for (int i = 3; i <= n; i++) {
 
