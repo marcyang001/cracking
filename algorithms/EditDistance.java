@@ -16,6 +16,22 @@
 
 	abaaba ---> bababaa === ??? 
  	bababaa
+
+Interesting observation about dynamic program: 
+
+in this case, our subproblem eD(x1a, y1a) will guarantee the same result 
+
+we can encounter eD(x1b, y1b) in another recursion branch where x1a == x1b and y1a == y1b. This is because 
+
+in every state, the outcome will always be one of the three operations: insert, remove and replace. 
+
+However, if the outcome of every state is not always to be one of the three operations, 
+
+i.e the number of child nodes is not 3 in some states, 
+
+then the results of subproblems eD(x1a, y1a) and eD(x1b, y1b) will not be the same;  
+
+
 */
 
 public class EditDistance {
